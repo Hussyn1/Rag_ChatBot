@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-powered RAG chatbot for Machine Learning, Deep Learning, RAG, and Context Engineering. Ask questions and get instant, source-cited answers.">
+    <title>NeuralQuery — AI Knowledge Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Animated background -->
+        <div class="bg-gradient"></div>
+        <div class="bg-grid"></div>
+        <div class="floating-orb orb-1"></div>
+        <div class="floating-orb orb-2"></div>
+        <div class="floating-orb orb-3"></div>
+
+        <!-- Header -->
+        <header class="header" id="header">
+            <div class="header-left">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M14 2L26 8V20L14 26L2 20V8L14 2Z" stroke="url(#logoGrad)" stroke-width="2" fill="none"/>
+                            <circle cx="14" cy="14" r="4" fill="url(#logoGrad)"/>
+                            <line x1="14" y1="10" x2="14" y2="4" stroke="url(#logoGrad)" stroke-width="1.5"/>
+                            <line x1="17.46" y1="12" x2="22.66" y2="9" stroke="url(#logoGrad)" stroke-width="1.5"/>
+                            <line x1="17.46" y1="16" x2="22.66" y2="19" stroke="url(#logoGrad)" stroke-width="1.5"/>
+                            <line x1="14" y1="18" x2="14" y2="24" stroke="url(#logoGrad)" stroke-width="1.5"/>
+                            <line x1="10.54" y1="16" x2="5.34" y2="19" stroke="url(#logoGrad)" stroke-width="1.5"/>
+                            <line x1="10.54" y1="12" x2="5.34" y2="9" stroke="url(#logoGrad)" stroke-width="1.5"/>
+                            <defs>
+                                <linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26">
+                                    <stop stop-color="#818cf8"/>
+                                    <stop offset="1" stop-color="#c084fc"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <h1>NeuralQuery</h1>
+                        <span class="logo-subtitle">AI Knowledge Assistant</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="stats-badge" id="statsBadge">
+                    <div class="stats-dot"></div>
+                    <span id="statsText">Loading...</span>
+                </div>
+                <button class="btn-icon" id="clearChatBtn" title="Clear chat">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="1 4 1 10 7 10"></polyline>
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Chat Container -->
+        <main class="chat-container" id="chatContainer">
+            <div class="chat-messages" id="chatMessages">
+                <!-- Welcome message -->
+                <div class="welcome-screen" id="welcomeScreen">
+                    <div class="welcome-icon">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                            <circle cx="32" cy="32" r="30" stroke="url(#welcomeGrad)" stroke-width="2" opacity="0.3"/>
+                            <circle cx="32" cy="32" r="20" stroke="url(#welcomeGrad)" stroke-width="2" opacity="0.5"/>
+                            <circle cx="32" cy="32" r="10" fill="url(#welcomeGrad)" opacity="0.8"/>
+                            <defs>
+                                <linearGradient id="welcomeGrad" x1="2" y1="2" x2="62" y2="62">
+                                    <stop stop-color="#818cf8"/>
+                                    <stop offset="1" stop-color="#c084fc"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h2>Welcome to NeuralQuery</h2>
+                    <p>Your AI-powered knowledge assistant for Machine Learning, Deep Learning, RAG, and Context Engineering. Ask me anything!</p>
+                    <div class="suggestion-chips" id="suggestionChips">
+                        <button class="chip" data-query="What is the difference between supervised and unsupervised learning?">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                            ML: Supervised vs Unsupervised
+                        </button>
+                        <button class="chip" data-query="Explain the transformer architecture and self-attention mechanism">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                            DL: Transformer Architecture
+                        </button>
+                        <button class="chip" data-query="How does the RAG pipeline work? Explain the indexing and retrieval phases.">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            RAG: Pipeline Architecture
+                        </button>
+                        <button class="chip" data-query="What is context engineering and how does it differ from prompt engineering?">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                            Context vs Prompt Engineering
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Input Area -->
+        <footer class="input-area" id="inputArea">
+            <div class="input-container">
+                <div class="input-glow"></div>
+                <textarea
+                    id="messageInput"
+                    placeholder="Ask about ML, Deep Learning, RAG, or Context Engineering..."
+                    rows="1"
+                    autocomplete="off"
+                ></textarea>
+                <button class="send-btn" id="sendBtn" disabled title="Send message">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+            <p class="input-hint">Press <kbd>Enter</kbd> to send · <kbd>Shift + Enter</kbd> for new line</p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
