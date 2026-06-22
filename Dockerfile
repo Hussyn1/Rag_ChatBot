@@ -5,7 +5,7 @@ WORKDIR /build
 
 # Install dependencies first (caching layer)
 COPY requirements.txt .
-RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Pre-download the embedding model so it's baked into the image
 RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
@@ -15,8 +15,8 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Copy installed packages from builder
-COPY --from=builder /install /usr/local
+# Copy installed packages and pre-downloaded model cache from builder
+COPY --from=builder /usr/local /usr/local
 COPY --from=builder /root/.cache /root/.cache
 
 # Copy application code
