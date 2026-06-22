@@ -13,6 +13,13 @@ RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTr
 # ---- Runtime Stage ----
 FROM python:3.12-slim
 
+# Limit PyTorch CPU thread count to avoid memory overhead/OOM on multi-core hosts
+ENV OMP_NUM_THREADS=1
+ENV MKL_NUM_THREADS=1
+ENV OPENBLAS_NUM_THREADS=1
+ENV VECLIB_MAXIMUM_THREADS=1
+ENV NUMEXPR_NUM_THREADS=1
+
 WORKDIR /app
 
 # Copy installed packages and pre-downloaded model cache from builder

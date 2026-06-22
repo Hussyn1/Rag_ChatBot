@@ -1,3 +1,14 @@
+import os
+# Limit PyTorch to single-threaded CPU execution to reduce memory overhead
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+
+import torch
+torch.set_num_threads(1)
+
 from sentence_transformers import SentenceTransformer
 from app.config import EMBEDDING_MODEL
 
